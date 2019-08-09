@@ -5,6 +5,10 @@ export default class Dashboard extends Component {
         return (
             <div>
                 Dashboard
+                <input type="text" placeholder='search'/>
+                <button>Search</button>
+                <button>Reset</button>
+                
             </div>
         )
     }
