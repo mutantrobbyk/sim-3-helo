@@ -11,9 +11,9 @@ app.use(express.json())
 
 massive(CONNECTION_STRING). then(db => {
     app.set('db', db)
+    app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`))
 })
 
 app.post('/auth/register', ctrl.register)
 app.post('/auth/login', ctrl.login)
-
-app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`))
+app.get(`/api/posts`, ctrl.getPosts)

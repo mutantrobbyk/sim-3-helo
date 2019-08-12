@@ -14,5 +14,10 @@ module.exports = {
         }
         const newUser = await db.create_user({username, password, profilePic})
         res.status(200).send(newUser)
+    },
+    getPosts: async (req, res) => {
+        const db = req.app.get('db')
+        const posts = await db.get_posts()
+        res.status(200).send(posts)
     }
 }
