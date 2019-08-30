@@ -13,5 +13,7 @@ title varchar(45),
 img text,
 content text,
 author_id integer references users(id));
-insert into posts (title, img, content)
+insert into posts (title, img, content, author_id)
 values ('Day at the Beach', 'https://www.flightnetwork.com/worlds-best-beaches/wp-content/uploads/2018/11/header-top100-beach25-475x226.jpg', 'What a lovely day at the beach');
+
+

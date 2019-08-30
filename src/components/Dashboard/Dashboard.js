@@ -5,7 +5,8 @@ export default class Dashboard extends Component {
   state = {
     posts: [],
     myPosts: true,
-    id: 0
+    id: 0,
+    search: ''
   };
   toggleChange = () => {
     this.setState({
@@ -16,7 +17,7 @@ export default class Dashboard extends Component {
     this.getPosts();
   }
   getPosts = () => {
-    axios.get(`/api/posts`).then(res => {
+    axios.get(`/api/posts?=${this.state.search}`).then(res => {
       console.log(res.data);
       this.setState({
         posts: res.data

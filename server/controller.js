@@ -17,7 +17,26 @@ module.exports = {
     },
     getPosts: async (req, res) => {
         const db = req.app.get('db')
-        const posts = await db.get_posts()
-        res.status(200).send(posts)
+        const myPosts = req.query.myPosts === 'true' ? true : false
+        const search = req.query.search ? req.query.search : ''
+        let userId = req.query.id
+        userId = +userId
+        if(myPosts && search !== '') {
+            const posts = await db.search_by_title([ '%' + search + '%'])
+            res.status(200).send(posts)
+        } else if (!myPosts && search === ''){
+            const posts = await db.search_title_notuser([userId])
+            res.status(200).send(posts)
+        } else if (!myPosts && search) {
+            const posts = await db.search_notuser_posts([userId, '%' + search +'%'])
+            res.status(200).send(posts)
+        } else if(myPosts && !search) {
+            const posts = await db.get_posts()
+            res.status(200).send(posts)
+        } else if(!myPosts && !search) {
+            const posts = await db.get_posts()
+            res.status(200).send(posts)
+        }
+       
     }
 }
